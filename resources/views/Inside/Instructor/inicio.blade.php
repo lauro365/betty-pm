@@ -911,7 +911,7 @@
 								<?php if(strtotime($c->fecha_inicio) >= strtotime($todayDate)){ ?>
 								{
 									title : '{!! $c->nombre_curso !!}',
-									start : new Date({!! $c->año !!}, ({!! $c->mes !!}-1), {!! $c->dia !!}),
+									start : new Date({!! $c->ano !!}, ({!! $c->mes !!}-1), {!! $c->dia !!}),
 									description : '{!! $c->estado !!}',
 									className: ["event", "bg-color-greenLight"],
 									icon: 'fa-check'		

@@ -60,15 +60,15 @@ class inicioadminController extends Controller
 
     public function store(Request $request){
 
-        $año = $request->input('año');
+        $ano = $request->input('año');
         $mes = $request->input('mes');
         $dia = $request->input('dia');
 
-        $fecha = $año.$mes.$dia;
+        $fecha = $ano.$mes.$dia;
 
         $cursito = new Curso;
         $cursito->fecha_inicio = $fecha;
-        $cursito->año = $año;
+        $cursito->ano = $ano;
         $cursito->mes = $mes;
         $cursito->dia = $dia;
         $cursito->nombre_curso = $request->input('name');

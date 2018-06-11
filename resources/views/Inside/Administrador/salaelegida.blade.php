@@ -928,7 +928,7 @@
 					@if($salaselegidas->id == $curso->sala_id)
 					{ 
 						title : '{!! $curso->nombre_curso !!}',
-						start: new Date({!! $curso->año !!}, ({!! $curso->mes !!}-1), {!! $curso->dia !!}),
+						start: new Date({!! $curso->ano !!}, ({!! $curso->mes !!}-1), {!! $curso->dia !!}),
 						description : '{!! $curso->estado !!}',
 						className: ["event", "bg-color-greenLight"],
 						icon: 'fa-check'
