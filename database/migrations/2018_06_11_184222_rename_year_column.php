@@ -13,7 +13,7 @@ class RenameYearColumn extends Migration
      */
     public function up()
     {
-        Schema::create('salas', function (Blueprint $table) {
+        Schema::table('salas', function (Blueprint $table) {
             $table->renameColumn('año', 'ano');
         });
     }
@@ -25,7 +25,7 @@ class RenameYearColumn extends Migration
      */
     public function down()
     {
-        Schema::create('salas', function (Blueprint $table) {
+        Schema::table('salas', function (Blueprint $table) {
             $table->renameColumn('ano', 'año');
         });
     }
