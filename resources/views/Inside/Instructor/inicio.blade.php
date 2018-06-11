@@ -217,7 +217,7 @@
 
 				<!-- logout button -->
 				<div id="logout" class="btn-header transparent pull-right">
-					<span> <a href="{{ url('/') }}" title="Cerrar Sesión" data-action="{{ route('logout') }}" data-logout-msg="Seguro que quieres salir?"><i class="fa fa-sign-out"></i></a> </span>				<!-- end logout button -->
+					<span> <a href="/inicioi/logout" title="Cerrar Sesión" data-action="" data-logout-msg="Seguro que quieres salir?"><i class="fa fa-sign-out"></i></a> </span>				<!-- end logout button -->
 
 
 			
@@ -244,7 +244,11 @@
 					<a href="javascript:void(0);" id="show-shortcut" data-action="">
 						<img src="img/avatars/sunny.png" alt="me" class="online" /> 
 						<span>
-							{{ Auth::user()->user }}
+								@if(Session::has('usuarioNombre'))
+								@if(Session::has('usuarioApellido'))
+									{{ Session::get('usuarioNombre') }}.{{ Session::get('usuarioApellido') }}
+								@endif
+								@endif
 						</span>
 						<i class="fa fa-angle-down"></i>
 					</a> 
@@ -347,7 +351,7 @@
 								data-widget-sortable="false"-->
 								<header>
 									<span class="widget-icon"><i class="fa fa-table"></i></span>
-									<h2>Siguiente Clase </h2>
+									<h2>Siguientes Cursos </h2>
 
 								</header>
 
@@ -366,156 +370,31 @@
                                        <table id="datatable_fixed_column" class="table table-striped table-bordered" width="100%">
 					                <thead>
 											<tr>
-								                    <th data-class="expand">ID</th>
+													<th data-class="expand">ID</th>
+													<th>Curso</th>
 								                    <th>Sala</th>
 								                    <th data-hide="phone, tablet">Fecha</th>
-								                    <th data-hide="phone,tablet">Duración</th>
 								                </tr>
 									</thead>
-									        <tbody>
+									<tbody>
+										<?php $todayDate = date("Y-m-d"); ?>
+										@foreach($cursos as $c)
+											@if($usuarioID == $c->instruct_id)
+											<?php if(strtotime($c->fecha_inicio) >= strtotime($todayDate)){ ?>
 											<tr>
-												<td>100</td>
-												<td>A</td>
-												<td>2015/04/19</td>
-												
-												<td>90 min.</td>
-
-												
-												
+												<td>{{$c->id}}</td>
+												<td>{{$c->nombre_curso}}</td>
+												@foreach($salas as $s)
+													@if($s->id == $c->sala_id)
+													<td>{{$s->num_sala}}</td>
+													@endif
+												@endforeach
+												<td>{{$c->fecha_inicio}}</td>
 											</tr>
-											<tr>
-												<td>101</td>
-												<td>B</td>
-												<td>2015/03/06</td>
-												
-												<td>15 min.</td>
-												
-											</tr>
-											<tr>
-												<td>102</td>
-												<td>C</td>
-												<td>2015/07/29</td>
-												
-												<td>30 min.</td>
-												
-											</tr>
-											<tr>
-												<td>101</td>
-												<td>B</td>
-												<td>2015/03/06</td>
-												
-												<td>15 min.</td>
-												
-											</tr>
-											<tr>
-												<td>100</td>
-												<td>E</td>
-												<td>2015/04/19</td>
-												
-												<td>90 min.</td>
-												
-											</tr>
-											<tr>
-													<td>100</td>
-												<td>F</td>
-												<td>2015/04/19</td>
-												
-												<td>90 min.</td>
-												
-											</tr>
-											<tr>
-												<td>100</td>
-												<td>G</td>
-												<td>2015/04/19</td>
-												
-												<td>90 min.</td>
-												
-											</tr>
-											<tr>
-													<td>100</td>
-												<td>H</td>
-												<td>2015/04/19</td>
-												
-												<td>90 min.</td>
-												
-											</tr>
-											<tr>
-												<td>200</td>
-												<td>I</td>
-												<td>2015/02/10</td>
-												
-												<td>25 min.</td>
-												
-											</tr>
-											<tr>
-												<td>200</td>
-												<td>J</td>
-												<td>2015/02/10</td>
-												
-												<td>25 min.</td>
-												
-											</tr>
-											<tr>
-												<td>100</td>
-												<td>K</td>
-												<td>2015/04/19</td>
-												
-												<td>90 min.</td>
-												
-											</tr>
-											<tr>
-												<td>100</td>
-												<td>L</td>
-												<td>2015/04/19</td>
-												
-												<td>90 min.</td>
-												
-											</tr>
-											</tr>
-												<tr>
-												<td>112</td>
-												<td>O</td>
-												<td>2015/04/19</td>
-												
-												<td>60 min.</td>
-												
-											</tr>
-											<tr>
-												<td>200</td>
-												<td>N</td>
-												<td>2015/02/10</td>
-												
-												<td>25 min.</td>
-												
-											</tr>
-												<tr>
-												<td>112</td>
-												<td>O</td>
-												<td>2015/04/19</td>
-												
-												<td>60 min.</td>
-												
-											</tr>
-											<tr>
-												<td>112</td>
-												<td>P</td>
-												<td>2015/04/19</td>
-												
-												<td>70 min.</td>
-												
-											</tr>
-										<tr>
-												<td>103</td>
-												<td>Q</td>
-												<td>2015/04/01</td>
-												
-												<td>35 min.</td>
-												
-											</tr>
-											
-											</tbody>
-
-																
+											<?php } ?>
+											@endif
+										@endforeach
+									</tbody>				
 										</table>
 
 									</div>
@@ -1026,55 +905,21 @@
 			            calendar.fullCalendar('unselect');
 			        },
 			
-			        events: [{
-			            title: 'All Day Event',
-			            start: new Date(y, m, 1),
-			            description: 'long description',
-			            className: ["event", "bg-color-greenLight"],
-			            icon: 'fa-check'
-			        }, {
-			            title: 'Long Event',
-			            start: new Date(y, m, d - 5),
-			            end: new Date(y, m, d - 2),
-			            className: ["event", "bg-color-red"],
-			            icon: 'fa-lock'
-			        }, {
-			            id: 999,
-			            title: 'Repeating Event',
-			            start: new Date(y, m, d - 3, 16, 0),
-			            allDay: false,
-			            className: ["event", "bg-color-blue"],
-			            icon: 'fa-clock-o'
-			        }, {
-			            id: 999,
-			            title: 'Repeating Event',
-			            start: new Date(y, m, d + 4, 16, 0),
-			            allDay: false,
-			            className: ["event", "bg-color-blue"],
-			            icon: 'fa-clock-o'
-			        }, {
-			            title: 'Meeting',
-			            start: new Date(y, m, d, 10, 30),
-			            allDay: false,
-			            className: ["event", "bg-color-darken"]
-			        }, {
-			            title: 'Lunch',
-			            start: new Date(y, m, d, 12, 0),
-			            end: new Date(y, m, d, 14, 0),
-			            allDay: false,
-			            className: ["event", "bg-color-darken"]
-			        }, {
-			            title: 'Birthday Party',
-			            start: new Date(y, m, d + 1, 19, 0),
-			            end: new Date(y, m, d + 1, 22, 30),
-			            allDay: false,
-			            className: ["event", "bg-color-darken"]
-			        }, {
-			            title: 'Smartadmin Open Day',
-			            start: new Date(y, m, 28),
-			            end: new Date(y, m, 29),
-			            className: ["event", "bg-color-darken"]
-			        }],
+					events: [<?php $todayDate = date("Y-m-d"); ?>
+						@foreach($cursos as $c)
+								@if($usuarioID == $c->instruct_id)
+								<?php if(strtotime($c->fecha_inicio) >= strtotime($todayDate)){ ?>
+								{
+									title : '{!! $c->nombre_curso !!}',
+									start : new Date({!! $c->año !!}, ({!! $c->mes !!}-1), {!! $c->dia !!}),
+									description : '{!! $c->estado !!}',
+									className: ["event", "bg-color-greenLight"],
+									icon: 'fa-check'		
+								},
+								<?php } ?>
+								@endif
+								@endforeach
+					],
 			
 			        eventRender: function (event, element, icon) {
 			            if (!event.description == "") {

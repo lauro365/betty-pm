@@ -232,7 +232,7 @@
 
 				<!-- logout button -->
 				<div id="logout" class="btn-header transparent pull-right">
-					<span> <a href="{{ url('/') }}" title="Cerrar Sesión" data-action="{{ route('logout') }}" data-logout-msg="Seguro que quieres salir?"><i class="fa fa-sign-out"></i></a> </span>				</div>
+					<span> <a href="/inicioemp/logout" title="Cerrar Sesión" data-action= data-logout-msg="Seguro que quieres salir?"><i class="fa fa-sign-out"></i></a> </span>				</div>
 				<!-- end logout button -->
 
 
@@ -260,7 +260,11 @@
 					<a href="javascript:void(0);" id="show-shortcut" data-action="">
 						<img src="img/avatars/sunny.png" alt="me" class="online" /> 
 						<span>
-							{{ Auth::user()->user }}
+								@if(Session::has('usuarioNombre'))
+								@if(Session::has('usuarioApellido'))
+									{{ Session::get('usuarioNombre') }}.{{ Session::get('usuarioApellido') }}
+								@endif
+								@endif
 						</span>
 						<i class="fa fa-angle-down"></i>
 					</a> 
@@ -285,7 +289,11 @@
 								<a href="{{ url('/inicioemp') }}" title="Dashboard"><span class="menu-item-parent">Inicio</span></a>
 							</li>
 							<li class="">
-								<a href="{{ url('/agregarcurso') }}" title="Dashboard"><span class="menu-item-parent">Mis Cursos</span></a>
+								<a href="{{ url('/miscursos') }}" title="Dashboard"><span class="menu-item-parent">Mis Cursos</span></a>
+							</li>
+							<li class="">
+								<a href="{{ url('/agregarcurso') }}" title="Dashboard"><span class="menu-item-parent">Agregar Cursos</span></a>
+							</li>
 						</ul>	
 					</li>
 					
@@ -332,7 +340,7 @@
 
 				<div class="row">
 					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
-						<h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home"></i> Inicio </h1><h2><span class="tamañoh2">Siguiente Clase :</span> <span class="HoradeclaseStyle">2:30 pm Sala A</span></h2>
+						<h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home"></i> Inicio </h1>
 					</div>
 				</div>
 			
@@ -344,81 +352,7 @@
 						<!-- NEW WIDGET START -->
 						<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							
-							<!-- Widget ID (each widget will need unique ID)-->
-							<div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
-								<!-- widget options:
-								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-
-								data-widget-colorbutton="false"
-								data-widget-editbutton="false"
-								data-widget-togglebutton="false"
-								data-widget-deletebutton="false"
-								data-widget-fullscreenbutton="false"
-								data-widget-custombutton="false"
-								data-widget-collapsed="true"
-								data-widget-sortable="false"-->
-								<header>
-									<span class="widget-icon"><i class="fa fa-table"></i></span>
-									<h2><span>Siguientes Clases</h2>
-
-								</header>
-
-								<!-- widget div-->
-								<div>
-
-									<!-- widget edit box -->
-									<div class="jarviswidget-editbox">
-										<!-- This area used as dropdown edit box -->
-
-									</div>
-									<!-- end widget edit box -->
-
-									<!-- widget content -->
-									<div class="widget-body no-padding">
-                                       <table id="datatable_fixed_column" class="table table-striped table-bordered" width="100%">
-					                <thead>
-											<tr>
-								                    <th data-class="expand">ID</th>
-								                    <th>Sala</th>
-								                    <th>Instructor</th>
-								                    <th data-hide="phone, tablet">Fecha</th>
-								                    <th data-hide="phone,tablet">Duración</th>
-								                </tr>
-									</thead>
-									        <tbody>
-											<tr>
-												<td>100</td>
-												<td>A</td>
-												<td>Liliana Pérez</td>
-												<td>2015/04/19, 2:30 - 4:00 PM</td>
-												<td>90 min.</td>
-
-												
-												
-											</tr>
-											<tr>
-												<td>101</td>
-												<td>B</td>
-												<td>Liliana Pérez</td>
-												<td>2015/03/06, 3:00 - 3:15 PM</td>
-												
-												<td>15 min.</td>
-												
-											</tr>
-											
-											
-											</tbody>
-
-																
-										</table>
-
-									</div>
-									<!-- end widget content -->
-
-								</div>
-								<!-- end widget div -->
-
-							</div>
+							
 							<!-- end widget -->
 
 						</article>
@@ -450,7 +384,7 @@
 							-->
 							<header>
 								<span class="widget-icon"> <i class="fa fa-calendar"></i> </span>
-								<h2> Calendario Salón A </h2>
+								<h2> Calendario de Cursos Programados</h2>
 								<div class="widget-toolbar">
 									<!-- add: non-hidden - to disable auto hide -->
 									<div class="btn-group">
@@ -920,55 +854,14 @@
 			            calendar.fullCalendar('unselect');
 			        },
 			
-			        events: [{
-			            title: 'All Day Event',
-			            start: new Date(y, m, 1),
-			            description: 'long description',
-			            className: ["event", "bg-color-greenLight"],
-			            icon: 'fa-check'
-			        }, {
-			            title: 'Long Event',
-			            start: new Date(y, m, d - 5),
-			            end: new Date(y, m, d - 2),
-			            className: ["event", "bg-color-red"],
-			            icon: 'fa-lock'
-			        }, {
-			            id: 999,
-			            title: 'Repeating Event',
-			            start: new Date(y, m, d - 3, 16, 0),
-			            allDay: false,
-			            className: ["event", "bg-color-blue"],
-			            icon: 'fa-clock-o'
-			        }, {
-			            id: 999,
-			            title: 'Repeating Event',
-			            start: new Date(y, m, d + 4, 16, 0),
-			            allDay: false,
-			            className: ["event", "bg-color-blue"],
-			            icon: 'fa-clock-o'
-			        }, {
-			            title: 'Meeting',
-			            start: new Date(y, m, d, 10, 30),
-			            allDay: false,
-			            className: ["event", "bg-color-darken"]
-			        }, {
-			            title: 'Lunch',
-			            start: new Date(y, m, d, 12, 0),
-			            end: new Date(y, m, d, 14, 0),
-			            allDay: false,
-			            className: ["event", "bg-color-darken"]
-			        }, {
-			            title: 'Birthday Party',
-			            start: new Date(y, m, d + 1, 19, 0),
-			            end: new Date(y, m, d + 1, 22, 30),
-			            allDay: false,
-			            className: ["event", "bg-color-darken"]
-			        }, {
-			            title: 'Smartadmin Open Day',
-			            start: new Date(y, m, 28),
-			            end: new Date(y, m, 29),
-			            className: ["event", "bg-color-darken"]
-			        }],
+			        events: [@foreach($cursos as $c => $curso){
+						title : '{!! $curso->nombre_curso !!}',
+						start: new Date({!! $curso->año !!}, ({!! $curso->mes !!}-1), {!! $curso->dia !!}),
+						description : '{!! $curso->estado !!}',
+						className: ["event", "bg-color-greenLight"],
+						icon: 'fa-check'
+					},
+					@endforeach],
 			
 			        eventRender: function (event, element, icon) {
 			            if (!event.description == "") {

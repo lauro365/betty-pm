@@ -73,44 +73,45 @@ Auth::routes();
 
 
 Route::get('/', 'LoginController@index');
-Route::post('/', 'LoginController@authenticate');
+Route::post('/', 'LoginController@authenticar');
 
 
 //Routes Actions from Admin
-
-//Route::post('/inicioadmin', 'LoginController@logout');
-Route::post('inicioadmin/logout', 'inicioadminController@logout');
+Route::get('inicioadmin/logout', 'inicioadminController@logout');
 Route::resource('inicioadmin', 'inicioadminController');
 
 Route::post('analitica/logout', 'adminanaliticaController@logout');
 Route::resource('analitica', 'adminanaliticaController');
 
-Route::post('salas/logout', 'salasController@logout');
+Route::get('salas/{id}', 'salasController@salatime');
+Route::get('salas/logout', 'salasController@logout');
 Route::resource('salas', 'salasController');
 
-Route::post('catalogoi/logout', 'catalogoiController@logout');
+Route::get('catalogoi/logout', 'catalogoiController@logout');
 Route::resource('catalogoi', 'catalogoiController');
 
 
 //Routes Actions From Empleado
-Route::post('/inicioemp', 'inicioempleadoController@logout');
-Route::resource('/inicioemp', 'inicioempleadoController');
+Route::get('/inicioemp/logout', 'inicioempleadoController@logout');
+Route::get('/inicioemp', 'inicioempleadoController@index');
 
-Route::post('/agregarcurso', 'agregarcursoController@logout');
-Route::resource('/agregarcurso', 'agregarcursoController');
+Route::get('/agregarcurso/logout', 'agregarcursoController@logout');
+Route::get('/agregarcurso/{id}', 'agregarcursoController@inscripcion');
+Route::get('/agregarcurso', 'agregarcursoController@index');
 
-Route::post('/miscursos', 'miscursosController@logout');
-Route::resource('/miscursos', 'miscursosController');
+Route::get('/miscursos/logout', 'miscursosController@logout');
+Route::get('/miscursos/{id}', 'miscursosController@borrar');
+Route::get('/miscursos', 'miscursosController@index');
 
 
 //Routes Actions From Instructor
-Route::post('/inicioi', 'inicioinstructorController@logout');
+Route::get('/inicioi/logout', 'inicioinstructorController@logout');
 Route::resource('/inicioi', 'inicioinstructorController');
 
-Route::post('/miscursosi', 'miscursosiController@logout');
+Route::get('/miscursosi/logout', 'miscursosiController@logout');
 Route::resource('/miscursosi', 'miscursosiController');
 
-Route::post('/empleadosi', 'empleadosiController@logout');
+Route::get('/empleadosi/logout', 'empleadosiController@logout');
 Route::resource('/empleadosi', 'empleadosiController');
 
 

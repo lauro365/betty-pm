@@ -217,7 +217,7 @@
 
 				<!-- logout button -->
 				<div id="logout" class="btn-header transparent pull-right">
-					<span> <a href="{{ url('/') }}" title="Cerrar Sesión" data-action=""{{ route('logout') }}"" data-logout-msg="Seguro que quieres salir?"><i class="fa fa-sign-out"></i></a> </span>
+					<span> <a href="inicioadmin/logout" title="Cerrar Sesión" data-action="" data-logout-msg="Seguro que quieres salir?"><i class="fa fa-sign-out"></i></a> </span>
 				</div>
 				<!-- end logout button -->
 
@@ -246,7 +246,11 @@
 					<a href="javascript:void(0);" id="show-shortcut" data-action="">
 						<img src="img/avatars/sunny.png" alt="me" class="online" /> 
 						<span>
-							{{ Auth::user()->user }}
+							@if(Session::has('usuarioNombre'))
+							@if(Session::has('usuarioApellido'))
+								{{ Session::get('usuarioNombre') }}.{{ Session::get('usuarioApellido') }}
+							@endif
+							@endif
 						</span>
 						<i class="fa fa-angle-down"></i>
 					</a> 
@@ -269,9 +273,6 @@
 						<ul>
 							<li class="active">
 								<a href="{{ url('/inicioadmin') }}" title="Dashboard"><span class="menu-item-parent">Inicio</span></a>
-							</li>
-							<li class="">
-								<a href="{{ url('/analitica') }}" title="Dashboard"><span class="menu-item-parent">Analítica</span></a>
 							</li>
 								<li class="">
 								<a href="{{ url('/salas') }}" title="Dashboard"><span class="menu-item-parent">Administración de Salas</span></a>
@@ -341,21 +342,145 @@
 
 						<!-- NEW WIDGET START -->
 						
-						<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">		
 							<form action="{{ action('inicioadminController@store') }}" method="POST">
 								{{ csrf_field() }}
-									<input type="submit" id="Agregar" value="Agregar curso" onclick="getSelectedRow()" />
-									<input type="text" id="jqg1_date" name="date" role="textbox" class="editable" style="width: 6%;">
-									<input type="text" id="jqg1_name" name="name" role="textbox" class="editable" style="width: 6%;">
-									<input type="text" id="jqg1_amount" name="amount" role="textbox" class="editable" style="width: 6%;">
-									<input type="text" id="jqg1_tax" name="tax" role="textbox" class="editable" style="width: 6%;">
-									<input type="text" id="jqg2_total" name="total" role="textbox" class="editable" style="width: 6%;">
-									<input type="text" id="jqg2_note" name="note" role="textbox" class="editable" style="width: 6%;">
+								<h3>Agregar Curso</h3>
+								<table class="table table-striped table-bordered" width="100%">
+									<thead>
+										<th class="hasinput" style="width:10%">
+											<h5>Nombre</h5>
+											<input type="text" class="form-control" name="name" placeholder="Curso" />
+										</th>
+										<th class="hasinput" style="width:10%">
+											<h5>Instructor</h5>
+											<select name="instructor" class="form-control" id="">
+												@foreach($instructores as $instructor)
+													<option value="{{$instructor->id}}">{{$instructor->name}} {{$instructor->lastname}}</option>
+												@endforeach
+											</select>
+										</th>
+										<th class="hasinput" style="width:10%">
+												<h5>Año</h5>
+											<select name="año" id="" class="form-control">
+													<option value="2018">2018</option>
+													<option value="2019">2019</option>
+											</select>
+										</th>
+										<th class="hasinput" style="width:10%">
+												<h5>Mes</h5>
+											<select name="mes" id="" class="form-control">
+													<option value="01">Enero</option>
+													<option value="02">Febrero</option>
+													<option value="03">Marzo</option>
+													<option value="04">Abril</option>
+													<option value="05">Mayo</option>
+													<option value="06">Junio</option>
+													<option value="07">Julio</option>
+													<option value="08">Agosto</option>
+													<option value="09">Septiembre</option>
+													<option value="10">Octubre</option>
+													<option value="11">Noviembre</option>
+													<option value="12">Diciembre</option>
+											</select>
+										</th>
+										<th class="hasinput" style="width:10%">
+												<h5>Dia</h5>
+											<select name="dia" id="" class="form-control">
+													<option value="01">1</option>
+													<option value="02">2</option>
+													<option value="03">3</option>
+													<option value="04">4</option>
+													<option value="05">5</option>
+													<option value="06">6</option>
+													<option value="07">7</option>
+													<option value="08">8</option>
+													<option value="09">9</option>
+													<option value="10">10</option>
+													<option value="11">11</option>
+													<option value="12">12</option>
+													<option value="13">13</option>
+													<option value="14">14</option>
+													<option value="15">15</option>
+													<option value="16">16</option>
+													<option value="17">17</option>
+													<option value="18">18</option>
+													<option value="19">19</option>
+													<option value="20">20</option>
+													<option value="21">21</option>
+													<option value="22">22</option>
+													<option value="23">23</option>
+													<option value="24">24</option>
+													<option value="25">25</option>
+													<option value="26">26</option>
+													<option value="27">27</option>
+													<option value="28">28</option>
+													<option value="29">29</option>
+													<option value="30">30</option>
+													<option value="31">31</option>
+											</select>
+										</th>
+										<th class="hasinput" style="width:10%">
+											<h5>Capacidad</h5>
+											<input type="text" class="form-control" name="tax" placeholder="Capacidad" />
+										</th>
+										<th class="hasinput" style="width:10%">
+											<h5>Calificacion</h5>
+											<input type="text" class="form-control" name="amount" placeholder="Aprobatoria" />
+										</th>
+										<th class="hasinput" style="width:10%">
+											<h5>Sala</h5>
+											<select name="sala" id="" class="form-control">
+													@foreach($salas as $sala)
+													<option value="{{$sala->id}}">{{$sala->num_sala}}</option>
+												@endforeach
+											</select>
+										</th>
+										<th class="hasinput" style="width:10%">
+											<input type="submit" class="form-control" id='Agregar' value='Agregar curso'/>
+										</th>
+									</thead>
+								</table>		
 							</form>
-							
-							<table id="jqgrid"></table>
-							<div id="pjqgrid"></div>
+						
+							<h3>Cursos</h3>
+							<table id="datatable_fixed_column" class="table table-striped table-bordered" width="100%">
+								<thead>
+									
+									<tr>
+										<th data-class="expand"> ID</th>
+										<th> Curso</th>
+										<th> Instructor</th>
+										<th> Fecha</th>
+										<th> Capacidad</th>
+										<th> Calificacion</th>
+										<th> Sala</th>
+										<th> Estado</th>
+									</tr>
+								</thead>
+								<tbody>
+										@if(count($cursos)>0)
+										@foreach($cursos as $c => $curso)
+											<tr>
+													<td>{{$curso->id}}</td>
+													<td>{{$curso->nombre_curso}}</td>
+													@foreach($instructores as $i)
+													@if($curso->instruct_id == $i->id)
+													<td>{{$i->name}} {{$i->lastname}}</td>
+													@endif
+													@endforeach
+													<td>{{$curso->fecha_inicio}}</td>
+													<td>{{$curso->cupo_maximo}} personas</td>
+													<td>{{$curso->calificacion_aprobatoria}} </td>
+													<td>Sala {{$curso->sala_id}} </td>
+													<td>{{$curso->estado}} </td>
+											</tr>
+										@endforeach
+										@else
 
+										@endif
+								</tbody>
+							</table>
 					
 						</article>
 						<!-- WIDGET END -->
@@ -584,23 +709,157 @@
 
 				var cursitos = {!! json_encode($cursos) !!};
 
-				var cursote = [@foreach($cursos as $c => $curso){
-					id : {!! $curso->id !!},
-					date : "{!! $curso->fecha_inicio !!}",
-					name : "{!! $curso->nombre_curso !!}",
-					note : "{!! $curso->estado !!}",
-					amount : {!! $curso->calificacion_aprobatoria !!},
-					tax : {!! $curso->cupo_maximo !!},
-					total : {!! $curso->cantidad_sesiones !!}
-				},		
-				@endforeach];
-
+				var jqgrid_data = [{
+					id : "1",
+					date : "2007-10-01",
+					name : "test",
+					note : "note",
+					amount : "200.00",
+					tax : "10.00",
+					total : "210.00"
+				}, {
+					id : "2",
+					date : "2007-10-02",
+					name : "test2",
+					note : "note2",
+					amount : "300.00",
+					tax : "20.00",
+					total : "320.00"
+				}, {
+					id : "3",
+					date : "2007-09-01",
+					name : "test3",
+					note : "note3",
+					amount : "400.00",
+					tax : "30.00",
+					total : "430.00"
+				}, {
+					id : "4",
+					date : "2007-10-04",
+					name : "test",
+					note : "note",
+					amount : "200.00",
+					tax : "10.00",
+					total : "210.00"
+				}, {
+					id : "5",
+					date : "2007-10-05",
+					name : "test2",
+					note : "note2",
+					amount : "300.00",
+					tax : "20.00",
+					total : "320.00"
+				}, {
+					id : "6",
+					date : "2007-09-06",
+					name : "test3",
+					note : "note3",
+					amount : "400.00",
+					tax : "30.00",
+					total : "430.00"
+				}, {
+					id : "7",
+					date : "2007-10-04",
+					name : "test",
+					note : "note",
+					amount : "200.00",
+					tax : "10.00",
+					total : "210.00"
+				}, {
+					id : "8",
+					date : "2007-10-03",
+					name : "test2",
+					note : "note2",
+					amount : "300.00",
+					tax : "20.00",
+					total : "320.00"
+				}, {
+					id : "9",
+					date : "2007-09-01",
+					name : "test3",
+					note : "note3",
+					amount : "400.00",
+					tax : "30.00",
+					total : "430.00"
+				}, {
+					id : "10",
+					date : "2007-10-01",
+					name : "test",
+					note : "note",
+					amount : "200.00",
+					tax : "10.00",
+					total : "210.00"
+				}, {
+					id : "11",
+					date : "2007-10-02",
+					name : "test2",
+					note : "note2",
+					amount : "300.00",
+					tax : "20.00",
+					total : "320.00"
+				}, {
+					id : "12",
+					date : "2007-09-01",
+					name : "test3",
+					note : "note3",
+					amount : "400.00",
+					tax : "30.00",
+					total : "430.00"
+				}, {
+					id : "13",
+					date : "2007-10-04",
+					name : "test",
+					note : "note",
+					amount : "200.00",
+					tax : "10.00",
+					total : "210.00"
+				}, {
+					id : "14",
+					date : "2007-10-05",
+					name : "test2",
+					note : "note2",
+					amount : "300.00",
+					tax : "20.00",
+					total : "320.00"
+				}, {
+					id : "15",
+					date : "2007-09-06",
+					name : "test3",
+					note : "note3",
+					amount : "400.00",
+					tax : "30.00",
+					total : "430.00"
+				}, {
+					id : "16",
+					date : "2007-10-04",
+					name : "test",
+					note : "note",
+					amount : "200.00",
+					tax : "10.00",
+					total : "210.00"
+				}, {
+					id : "17",
+					date : "2007-10-03",
+					name : "test2",
+					note : "note2",
+					amount : "300.00",
+					tax : "20.00",
+					total : "320.00"
+				}, {
+					id : "18",
+					date : "2007-09-01",
+					name : "test3",
+					note : "note3",
+					amount : "400.00",
+					tax : "30.00",
+					total : "430.00"
+				}];
 
 				jQuery("#jqgrid").jqGrid({
-					data : cursote,
+					data : jqgrid_data,
 					datatype : "local",
 					height : 'auto',
-					colNames : ['Acción', 'Curso', 'Creado', 'Nombre del Curso', 'Calif Aprobatoria', 'Capacidad', 'Duración en minutos', 'Notas sobre el Curso'],
+					colNames : ['Acción', 'Curso', 'Año', 'Mes', 'Dia', 'Instructor', 'Precio', 'Capacidad', 'Duración', 'Notas sobre el Curso', 'Instructor2', 'Sala'],
 					colModel : [{
 						name : 'act',
 						index : 'act',
@@ -611,7 +870,38 @@
 					}, {
 						name : 'date',
 						index : 'date',
-						editable : true
+						editable : true,
+						formatter : 'select',
+						edittype : 'select',
+						stype : 'select',
+						editoptions : {
+							value : '2018:2018;2019:2019;',
+							defaultValue : '2018'
+						}
+					}, {
+						name : 'Mes',
+						index : 'Mes',
+						align : 'right',
+						editable : true,
+						formatter : 'select',
+						edittype : 'select', 
+						stype : 'select',
+						editoptions : {
+							value :  '1:Enero;2:Febrero;3:Marzo;4:Abril;5:Mayo;6:Junio;7:Julio;8:Agosto;9:Septiembre;10:Octubre;11:Noviembre;12:Diciembre;', 
+							defaultValue : '1'
+						}
+					}, {
+						name : 'Dia',
+						index : 'Dia',
+						align : 'right',
+						editable : true,
+						formatter : 'select',
+						edittype : 'select', 
+						stype : 'select',
+						editoptions : {
+							value :  '1:1;2:2;3:3;4:4;5:5;6:6;7:7;8:8;9:9;10:10;11:11;12:12;13:13;14:14;15:15;16:16;17:17;18:18;19:19;20:20;21:21;22:22;23:23;24:24;25:25;26:26;27:27;28:28;29:29;30:30;31:31;', 
+							defaultValue : '1'
+						}
 					}, {
 						name : 'name',
 						index : 'name',
@@ -636,6 +926,30 @@
 						index : 'note',
 						sortable : false,
 						editable : true
+					}, {
+						name : 'Instructor2',
+						index : 'Instructor2',
+						align : 'right',
+						editable : true,
+						formatter : 'select',
+						edittype : 'select', 
+						stype : 'select',
+						editoptions : {
+							value :  '1:Hola;2:Como;3:Estas;', 
+							defaultValue : '1'
+						}
+					}, {
+						name : 'Sala',
+						index : 'Sala',
+						align : 'right',
+						editable : true,
+						formatter : 'select',
+						edittype : 'select',
+						stype : 'select',
+						editoptions : {
+							value : '1:Sala1;2:Sala2;3:Sala3;',
+							defaultValue : '1'
+						}
 					}],
 					rowNum : 10,
 					rowList : [10, 20, 30],
@@ -659,8 +973,8 @@
 							});
 						}
 					},
-					//editurl : "{{ action('inicioadminController@store') }}",
-					url : "",
+					editurl : "{{ action('inicioadminController@store') }}",
+					//url : "",
 					caption : "CREA CURSO",
 					multiselect : true,
 					autowidth : true,
@@ -881,55 +1195,14 @@
 			            calendar.fullCalendar('unselect');
 			        },
 			
-			        events: [{
-			            title: 'All Day Event',
-			            start: new Date(y, m, 1),
-			            description: 'long description',
-			            className: ["event", "bg-color-greenLight"],
-			            icon: 'fa-check'
-			        }, {
-			            title: 'Long Event',
-			            start: new Date(y, m, d - 5),
-			            end: new Date(y, m, d - 2),
-			            className: ["event", "bg-color-red"],
-			            icon: 'fa-lock'
-			        }, {
-			            id: 999,
-			            title: 'Repeating Event',
-			            start: new Date(y, m, d - 3, 16, 0),
-			            allDay: false,
-			            className: ["event", "bg-color-blue"],
-			            icon: 'fa-clock-o'
-			        }, {
-			            id: 999,
-			            title: 'Repeating Event',
-			            start: new Date(y, m, d + 4, 16, 0),
-			            allDay: false,
-			            className: ["event", "bg-color-blue"],
-			            icon: 'fa-clock-o'
-			        }, {
-			            title: 'Meeting',
-			            start: new Date(y, m, d, 10, 30),
-			            allDay: false,
-			            className: ["event", "bg-color-darken"]
-			        }, {
-			            title: 'Lunch',
-			            start: new Date(y, m, d, 12, 0),
-			            end: new Date(y, m, d, 14, 0),
-			            allDay: false,
-			            className: ["event", "bg-color-darken"]
-			        }, {
-			            title: 'Birthday Party',
-			            start: new Date(y, m, d + 1, 19, 0),
-			            end: new Date(y, m, d + 1, 22, 30),
-			            allDay: false,
-			            className: ["event", "bg-color-darken"]
-			        }, {
-			            title: 'Smartadmin Open Day',
-			            start: new Date(y, m, 28),
-			            end: new Date(y, m, 29),
-			            className: ["event", "bg-color-darken"]
-			        }],
+					events: [ @foreach($cursos as $c => $curso){
+						title : '{!! $curso->nombre_curso !!}',
+						start: new Date({!! $curso->año !!}, ({!! $curso->mes !!}-1), {!! $curso->dia !!}),
+						description : '{!! $curso->estado !!}',
+						className: ["event", "bg-color-greenLight"],
+						icon: 'fa-check'
+					},
+					@endforeach],
 			
 			        eventRender: function (event, element, icon) {
 			            if (!event.description == "") {

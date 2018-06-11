@@ -18,6 +18,9 @@ class CreateCursosTable extends Migration
             $table->string('nombre_curso');
             $table->integer('cantidad_sesiones');
             $table->date('fecha_inicio');
+            $table->integer('año');
+            $table->integer('mes');
+            $table->integer('dia');
             $table->time('hora_inicio')->nullable();
             $table->time('hora_receso')->nullable();
             $table->time('hora_fin')->nullable();

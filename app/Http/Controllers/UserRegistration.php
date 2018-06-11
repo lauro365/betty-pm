@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Empleado;
 use App\UserAdmin;
@@ -52,7 +53,10 @@ class UserRegistration extends Controller
         $empleado->name = $request->input('firstname');
         $empleado->lastname = $request->input('lastname');
         $empleado->save();
-        Auth::login($empleado);
+
+        Session::put('usuarioID', $empleado->id);
+        Session::put('usuarioNombre', $empleado->name);
+        Session::put('usuarioApellido', $empleado->lastname);   
         return redirect('/inicioemp');
         break;
 
@@ -65,7 +69,10 @@ class UserRegistration extends Controller
         $admin->name = $request->input('firstname');
         $admin->lastname = $request->input('lastname');
         $admin->save();
-        Auth::login($admin);
+
+        Session::put('usuarioID', $admin->id);
+        Session::put('usuarioNombre', $admin->name);
+        Session::put('usuarioApellido', $admin->lastname);   
         return redirect('/inicioadmin');
         break;
 
@@ -78,10 +85,12 @@ class UserRegistration extends Controller
         $Instruct->name = $request->input('firstname');
         $Instruct->lastname = $request->input('lastname');
         $Instruct->save();
-        Auth::login($Instruct);
+
+        Session::put('usuarioID', $Instruct->id);
+        Session::put('usuarioNombre', $Instruct->name);
+        Session::put('usuarioApellido', $Instruct->lastname);   
         return redirect('/inicioi');
         break;
-
        }
        
         

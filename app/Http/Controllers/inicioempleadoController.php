@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use App\Empleado;
+use App\UserAdmin;
+use App\InstructUser;
+use App\Curso;
+use App\Sala;
 
 class inicioempleadoController extends Controller
 {
@@ -11,11 +17,11 @@ class inicioempleadoController extends Controller
      * Create a new controller instance.
      *
      * @return void
-     */
+     *//*
     public function __construct()
     {
         $this->middleware('auth');
-    }
+    }*/
 
     /**
      * Show the application dashboard.
@@ -24,20 +30,19 @@ class inicioempleadoController extends Controller
      */
     public function index()
     {
-        return view('Inside.Empleados.inicio');
+        $cursos = Curso::all();
+        return view('Inside.Empleados.inicio')->with('cursos', $cursos);
     }
 
     public function logout()
     {
-        Auth::logout();
-        
-        if(Auth::check()){
-            return ('Validado aun');
+        Session::flush();
+        if(Session::has('usuarioID'))
+        {
+            return ('Sigue validado');
         }
         else{
-            return view('/');
-        }
-        
-        
+            return redirect()->intended('/');
+        }   
     }
 }

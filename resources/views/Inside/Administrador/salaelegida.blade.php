@@ -11,27 +11,27 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<!-- Basic Styles -->
-		<link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="/css/font-awesome.min.css">
 
 		<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
-		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production-plugins.min.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-production-plugins.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-production.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-skins.min.css">
 
 		<!-- SmartAdmin RTL Support  -->
-		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-rtl.min.css">
 
 		<!-- We recommend you use "your_style.css" to override SmartAdmin
 		     specific styles this will also ensure you retrain your customization with each SmartAdmin update.
-		<link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
+		<link rel="stylesheet" type="text/css" media="screen" href="/css/your_style.css"> -->
 
 		<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
-		<link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="/css/demo.min.css">
 
 		<!-- FAVICONS -->
-		<link rel="shortcut icon" href="img/favicon/ledevicon.png" type="image/x-icon">
-		<link rel="icon" href="img/favicon/ledevicon.png" type="image/x-icon">
+		<link rel="shortcut icon" href="/img/favicon/ledevicon.png" type="image/x-icon">
+		<link rel="icon" href="/img/favicon/ledevicon.png" type="image/x-icon">
 
 		<!-- GOOGLE FONT -->
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
@@ -39,18 +39,18 @@
 		<!-- Specifying a Webpage Icon for Web Clip 
 			 Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
 		<link rel="apple-touch-icon" href="img/splash/sptouch-icon-iphone.png">
-		<link rel="apple-touch-icon" sizes="76x76" href="img/splash/touch-icon-ipad.png">
-		<link rel="apple-touch-icon" sizes="120x120" href="img/splash/touch-icon-iphone-retina.png">
-		<link rel="apple-touch-icon" sizes="152x152" href="img/splash/touch-icon-ipad-retina.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/img/splash/touch-icon-ipad.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/img/splash/touch-icon-iphone-retina.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/img/splash/touch-icon-ipad-retina.png">
 		
 		<!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		
 		<!-- Startup image for web apps -->
-		<link rel="apple-touch-startup-image" href="img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
-		<link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
-		<link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+		<link rel="apple-touch-startup-image" href="/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+		<link rel="apple-touch-startup-image" href="/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+		<link rel="apple-touch-startup-image" href="/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
 
 
@@ -61,7 +61,7 @@
 
 
 
-<style type="text/css">
+<style type="/text/css">
 	
 .poslogo{
 	margin-top: -11px;
@@ -125,7 +125,7 @@
 			<div id="logo-group">
 
 				<!-- PLACE YOUR LOGO HERE -->
-				<span id="logo"> <img src="img/logo ledev.png" alt="LearningDeveloper" class="poslogo"> </span>
+				<span id="logo"> <img src="/img/logo ledev.png" alt="LearningDeveloper" class="poslogo"> </span>
 				<!-- END LOGO PLACEHOLDER -->
 
 				<!-- Note: The activity badge color changes when clicked and resets the number to 0
@@ -189,7 +189,7 @@
 				<ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
 					<li class="">
 						<a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown"> 
-							<img src="img/avatars/sunny.png" alt="John Doe" class="online" />  
+							<img src="/img/avatars/sunny.png" alt="John Doe" class="online" />  
 						</a>
 						<ul class="dropdown-menu pull-right">
 							<li>
@@ -242,7 +242,7 @@
 				<span> <!-- User image size is adjusted inside CSS, it should stay as it --> 
 					
 					<a href="javascript:void(0);" id="show-shortcut" data-action="">
-						<img src="img/avatars/sunny.png" alt="me" class="online" /> 
+						<img src="/img/avatars/sunny.png" alt="me" class="online" /> 
 						<span>
 								@if(Session::has('usuarioNombre'))
 								@if(Session::has('usuarioApellido'))
@@ -375,20 +375,6 @@
 
 										<table id="datatable_fixed_column" class="table table-striped table-bordered" width="100%">					
 									        <thead>
-												<tr>
-													<th class="hasinput" style="width:10%">
-														<input type="text" class="form-control" placeholder="ID" />
-													</th>
-													<th class="hasinput" style="width:12%">
-														<input type="text" class="form-control" placeholder="Sala" />
-													</th>												
-													<th class="hasinput" style="width:10%">
-														<input type="text" class="form-control" placeholder="Capacidad" />
-													</th>
-													<th class="hasinput" style="width:10%">
-														<input type="text" class="form-control" placeholder="Estado" />
-													</th>
-												</tr>
 									            <tr>
 								                    <th data-class="expand">ID</th>
 								                    <th >Sala</th>
@@ -397,16 +383,12 @@
 									            </tr>
 									        </thead>
 											<tbody>
-												@if(count($salas))
-												@foreach($salas as $sala)
 												<tr>
-													<td>{{$sala->id}}</td>
-													<td>{{$sala->num_sala}}</td>
-													<td>{{$sala->cupo_maximo}}</td>
-													<td><span><a href="salas/{{$sala->id}}" class="center-block padding-5 label label-success">Disponible</a></span></td>
+													<td>{{$salaselegidas->id}}</td>
+													<td>{{$salaselegidas->num_sala}}</td>
+													<td>{{$salaselegidas->cupo_maximo}}</td>
+													<td><span><a href="" class="center-block padding-5 label label-success">Disponible</a></span></td>
 												</tr>
-												@endforeach
-												@endif
 											</tbody>				
 										</table>
 
@@ -571,61 +553,61 @@
 
  <!-- TABLA CREACION DE CURSOS -->
 		<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-		<script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
+		<script data-pace-options='{ "restartOnRequestAfter": true }' src="/js/plugin/pace/pace.min.js"></script>
 
 		<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script>
 			if (!window.jQuery) {
-				document.write('<script src="js/libs/jquery-2.1.1.min.js"><\/script>');
+				document.write('<script src="/js/libs/jquery-2.1.1.min.js"><\/script>');
 			}
 		</script>
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script>
 			if (!window.jQuery.ui) {
-				document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+				document.write('<script src="/js/libs/jquery-ui-1.10.3.min.js"><\/script>');
 			}
 		</script>
 
 		<!-- IMPORTANT: APP CONFIG -->
-		<script src="js/app.config.js"></script>
+		<script src="/js/app.config.js"></script>
 
 		<!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-		<script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+		<script src="/js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
 
 		<!-- BOOTSTRAP JS -->
-		<script src="js/bootstrap/bootstrap.min.js"></script>
+		<script src="/js/bootstrap/bootstrap.min.js"></script>
 
 		<!-- CUSTOM NOTIFICATION -->
-		<script src="js/notification/SmartNotification.min.js"></script>
+		<script src="/js/notification/SmartNotification.min.js"></script>
 
 		<!-- JARVIS WIDGETS -->
-		<script src="js/smartwidgets/jarvis.widget.min.js"></script>
+		<script src="/js/smartwidgets/jarvis.widget.min.js"></script>
 
 		<!-- EASY PIE CHARTS -->
-		<script src="js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+		<script src="/js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
 
 		<!-- SPARKLINES -->
-		<script src="js/plugin/sparkline/jquery.sparkline.min.js"></script>
+		<script src="/js/plugin/sparkline/jquery.sparkline.min.js"></script>
 
 		<!-- JQUERY VALIDATE -->
-		<script src="js/plugin/jquery-validate/jquery.validate.min.js"></script>
+		<script src="/js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
 		<!-- JQUERY MASKED INPUT -->
-		<script src="js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+		<script src="/js/plugin/masked-input/jquery.maskedinput.min.js"></script>
 
 		<!-- JQUERY SELECT2 INPUT -->
-		<script src="js/plugin/select2/select2.min.js"></script>
+		<script src="/js/plugin/select2/select2.min.js"></script>
 
 		<!-- JQUERY UI + Bootstrap Slider -->
-		<script src="js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+		<script src="/js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
 
 		<!-- browser msie issue fix -->
-		<script src="js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+		<script src="/js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
 
 		<!-- FastClick: For mobile devices -->
-		<script src="js/plugin/fastclick/fastclick.min.js"></script>
+		<script src="/js/plugin/fastclick/fastclick.min.js"></script>
 
 		<!--[if IE 8]>
 
@@ -635,15 +617,15 @@
 
 	
 		<!-- MAIN APP JS FILE -->
-		<script src="js/app.min.js"></script>
+		<script src="/js/app.min.js"></script>
 
 		<!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
 		<!-- Voice command : plugin -->
-		<script src="js/speech/voicecommand.min.js"></script>
+		<script src="/js/speech/voicecommand.min.js"></script>
 
 		<!-- SmartChat UI : plugin -->
-		<script src="js/smart-chat-ui/smart.chat.ui.min.js"></script>
-		<script src="js/smart-chat-ui/smart.chat.manager.min.js"></script>
+		<script src="/js/smart-chat-ui/smart.chat.ui.min.js"></script>
+		<script src="/js/smart-chat-ui/smart.chat.manager.min.js"></script>
 
 
 
@@ -654,11 +636,11 @@
 
 		<!-- PAGE RELATED PLUGIN(S) 
 		<script src="..."></script>-->
-		<script src="js/plugin/datatables/jquery.dataTables.min.js"></script>
-		<script src="js/plugin/datatables/dataTables.colVis.min.js"></script>
-		<script src="js/plugin/datatables/dataTables.tableTools.min.js"></script>
-		<script src="js/plugin/datatables/dataTables.bootstrap.min.js"></script>
-		<script src="js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+		<script src="/js/plugin/datatables/jquery.dataTables.min.js"></script>
+		<script src="/js/plugin/datatables/dataTables.colVis.min.js"></script>
+		<script src="/js/plugin/datatables/dataTables.tableTools.min.js"></script>
+		<script src="/js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+		<script src="/js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
 
 		<script type="text/javascript">
 
@@ -775,7 +757,7 @@
 			    });
 			    
 			    // custom toolbar
-			    $("div.toolbar").html('<div class="text-right"><img src="img/logo ledev.png" alt="LearningDeveloper" style="width: 111px; margin-top: 4px; margin-right: 10px;"></div>');
+			    $("div.toolbar").html('<div class="text-right"><img src="/img/logo ledev.png" alt="LearningDeveloper" style="width: 111px; margin-top: 4px; margin-right: 10px;"></div>');
 			    	   
 			    // Apply the filter
 			    $("#datatable_fixed_column thead th input[type=text]").on( 'keyup change', function () {
@@ -818,8 +800,8 @@
  <!-- CALENDARIO DE LOS CURSOS -->
 
 <!-- PAGE RELATED PLUGIN(S) -->
-		<script src="js/plugin/moment/moment.min.js"></script>
-		<script src="js/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>
+		<script src="/js/plugin/moment/moment.min.js"></script>
+		<script src="/js/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>
 
 		<script type="text/javascript">
 		
@@ -942,9 +924,17 @@
 			        },
 			
 					events: [
-					
-						//Datos de los eventos para mostrar en calendario
-
+					@foreach($cursos as $c => $curso)
+					@if($salaselegidas->id == $curso->sala_id)
+					{ 
+						title : '{!! $curso->nombre_curso !!}',
+						start: new Date({!! $curso->año !!}, ({!! $curso->mes !!}-1), {!! $curso->dia !!}),
+						description : '{!! $curso->estado !!}',
+						className: ["event", "bg-color-greenLight"],
+						icon: 'fa-check'
+                    },
+                    @endif
+					@endforeach
 					],
 			
 			        eventRender: function (event, element, icon) {

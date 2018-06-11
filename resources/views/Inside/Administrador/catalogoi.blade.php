@@ -217,7 +217,7 @@
 
 				<!-- logout button -->
 				<div id="logout" class="btn-header transparent pull-right">
-					<span> <a href="{{ url('/') }}" title="Cerrar Sesión" data-action="{{ route('logout') }}" data-logout-msg="Seguro que quieres salir?"><i class="fa fa-sign-out"></i></a> </span>				</div>
+					<span> <a href="inicioadmin/logout" title="Cerrar Sesión" data-action="" data-logout-msg="Seguro que quieres salir?"><i class="fa fa-sign-out"></i></a> </span>				</div>
 				<!-- end logout button -->
 
 
@@ -245,7 +245,11 @@
 					<a href="javascript:void(0);" id="show-shortcut" data-action="">
 						<img src="img/avatars/sunny.png" alt="me" class="online" /> 
 						<span>
-							{{ Auth::user()->user }} 
+								@if(Session::has('usuarioNombre'))
+								@if(Session::has('usuarioApellido'))
+									{{ Session::get('usuarioNombre') }}.{{ Session::get('usuarioApellido') }}
+								@endif
+								@endif 
 						</span>
 						<i class="fa fa-angle-down"></i>
 					</a> 
@@ -268,9 +272,6 @@
 						<ul>
 							<li class="">
 								<a href="{{ url('/inicioadmin') }}" title="Dashboard"><span class="menu-item-parent">Inicio</span></a>
-							</li>
-							<li class="">
-								<a href="{{ url('/analitica') }}" title="Dashboard"><span class="menu-item-parent">Analítica</span></a>
 							</li>
 								<li class="">
 								<a href="{{ url('/salas') }}" title="Dashboard"><span class="menu-item-parent">Administración de Salas</span></a>
@@ -383,18 +384,8 @@
 													<th class="hasinput" style="width:12%">
 														<input type="text" class="form-control" placeholder="Instructor" />
 													</th>
-													<th class="hasinput icon-addon">
-														<input id="dateselect_filter" type="text" placeholder="Ultimo curso impartido" class="form-control">
-														
-													</th>
-													<th class="hasinput">
-														<input type="text" class="form-control" placeholder="Proximo curso" />
-													</th>
 													<th class="hasinput" style="width:14%">
-														<input type="text" class="form-control" placeholder="Cursos impartidos" />
-													</th>
-													<th class="hasinput" style="width:10%">
-														<input type="text" class="form-control" placeholder="Calificación" />
+														<input type="text" class="form-control" placeholder="Cursos totales" />
 													</th>
 													<th class="hasinput" style="width:10%">
 														<input type="text" class="form-control" placeholder="Estado" />
@@ -404,142 +395,28 @@
 									            <tr>
 								                    <th data-class="expand">Clave</th>
 								                    <th >Instructor</th>
-								                    <th data-hide="phone, tablet">Ultimo curso impartido</th>
-								                    <th data-hide="phone, tablet">Proximo Curso</th>
-								                    <th data-hide="phone,tablet">Cursos impartidos</th>
-								                    <th data-hide="phone,tablet">Calificación</th>
+								                    <th data-hide="phone,tablet">Cursos totales</th>
 								                    <th>Estado</th>
 									            </tr>
 									        </thead>
 
 											<tbody>
-											<tr>
-												<td>100</td>
-												<td>Liliana Pérez</td>
-												<td>2015/04/19</td>
-												<td>2015/07/19</td>
-												<td>23</td>
-												<td>92.3</td>
-												<td><span class="center-block padding-5 label label-success">Disponible</span></td>
-											</tr>
-											<tr>
-												<td>100</td>
-												<td>Juan Sanchez</td>
-												<td>2015/03/06</td>
-												<td>2015/10/06</td>
-												<td>11</td>
-												<td>89.4</td>
-												<td><span class="center-block padding-5 label label-warning">En curso</span></td>
-											</tr>
-											<tr>
-												<td>102</td>
-												<td>Martín Alvares</td>
-												<td>2015/07/29</td>
-												<td>2015/12/29</td>
-												<td>4</td>
-												<td>96.1</td>
-												<td><span class="center-block padding-5 label label-warning">En curso</span></td>
-											</tr>
-											<tr>
-												<td>103</td>
-												<td>Juan Sanchez</td>
-												<td>2015/03/06</td>
-												<td>2015/07/06</td>
-												<td>15</td>
-												<td>90.7</td>
-												<td><span class="center-block padding-5 label label-warning">En curso</span></td>
-											</tr>
-											<tr>
-												<td>112</td>
-												<td>Liliana Pérez</td>
-												<td>2015/04/19</td>
-												<td>2015/11/09</td>
-												<td>10</td>
-												<td>88.5</td>
-												<td><span class="center-block padding-5 label label-success">Disponible</span></td>
-											</tr>
-											<tr>
-													<td>112</td>
-												<td>Liliana Pérez</td>
-												<td>2015/04/19</td>
-												<td>2015/08/13</td>
-												<td>16</td>
-												<td>87.3</td>
-												<td><span class="center-block padding-5 label label-success">Disponible</span></td>
-											</tr>
-											<tr>
-												<td>112</td>
-												<td>Liliana Pérez</td>
-												<td>2015/04/19</td>
-												<td>2015/12/19</td>
-												<td>20</td>
-												<td>50.00</td>
-												<td><span class="center-block padding-5 label label-success">Disponible</span></td>
-											</tr>
-											<tr>
-													<td>200</td>
-												<td>Liliana Pérez</td>
-												<td>2015/04/19</td>
-												<td>2016/04/19</td>
-												<td>13</td>
-												<td>86.6</td>
-												<td><span class="center-block padding-5 label label-success">Disponible</span></td>
-											</tr>
-											<tr>
-												<td>200</td>
-												<td>Raúl Ochoa</td>
-												<td>2015/02/10</td>
-												<td>2015/03/15</td>
-												<td>6</td>
-												<td>97.1</td>
-												<td><span class="center-block padding-5 label label-default">No disponible</span></td>
-											</tr>
-											<tr>
-												<td>200</td>
-												<td>Raúl Ochoa</td>
-												<td>2015/02/10</td>
-												<td>2015/04/10</td>
-												<td>1</td>
-												<td>85.3</td>
-												<td><span class="center-block padding-5 label label-default">No disponible</span></td>
-											</tr>
-												<tr>
-													<td>100</td>
-												<td>Liliana Pérez</td>
-												<td>2015/04/19</td>
-												<td>2016/04/19</td>
-												<td>13</td>
-												<td>86.6</td>
-												<td><span class="center-block padding-5 label label-success">Disponible</span></td>
-											</tr>
-												<tr>
-													<td>100</td>
-												<td>Liliana Pérez</td>
-												<td>2015/04/19</td>
-												<td>2016/04/19</td>
-												<td>13</td>
-												<td>86.6</td>
-												<td><span class="center-block padding-5 label label-success">Disponible</span></td>
-											</tr>
-										<tr>
-												<td>100</td>
-												<td>Raúl Ochoa</td>
-												<td>2015/02/10</td>
-												<td>2015/04/10</td>
-												<td>1</td>
-												<td>85.3</td>
-												<td><span class="center-block padding-5 label label-default">No disponible</span></td>
-											</tr>
-										<tr>
-												<td>101</td>
-												<td>Juan Sanchez</td>
-												<td>2015/03/06</td>
-												<td>2015/07/06</td>
-												<td>15</td>
-												<td>90.7</td>
-												<td><span class="center-block padding-5 label label-warning">En curso</span></td>
-											</tr>
-											
+												@if(count($instructores)>0)
+												@foreach($instructores as $i => $instructor)
+												<?php $cursototal = 0; ?>
+													<tr>
+														<td>{!! $instructor->id !!}</td>
+														<td>{!! $instructor->name !!} {!! $instructor->lastname !!}</td>
+														@foreach($cursos as $curso)
+														@if($instructor->id == $curso->instruct_id)
+															<?php $cursototal = $cursototal + 1; ?>
+														@endif
+														@endforeach
+														<td> <?php echo $cursototal ?> </td>
+														<td><span class="center-block padding-5 label label-success">Disponible</span></td>
+													</tr>
+												@endforeach
+												@endif
 											</tbody>
 																
 										</table>
@@ -572,142 +449,7 @@
 					</div>
 
 					<!-- end row -->
-
-
-
-
-
-
-
-<div class="col-sm-11">
-				
-				
-							<div class="well well-sm">
-				
-								<div class="row">
-				
-									<div class="col-sm-12 col-md-12 col-lg-12">
-										<div class="well well-light well-sm no-margin no-padding">
-				
-											<div class="row">
-				
-												<div class="col-sm-12">
-													<div id="myCarousel" class="carousel fade profile-carousel">
-													
-														<div class="air air-top-left padding-10">
-															<h4 class="txt-color-white font-md">Ene 1, 2014</h4>
-														</div>
-														<ol class="carousel-indicators">
-															<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-															<li data-target="#myCarousel" data-slide-to="1" class=""></li>
-															<li data-target="#myCarousel" data-slide-to="2" class=""></li>
-														</ol>
-														<div class="carousel-inner">
-															<!-- Slide 1 -->
-															<div class="item active">
-																<img src="img/demo/s1.jpg" alt="demo user">
-															</div>
-															<!-- Slide 2 -->
-															<div class="item">
-																<img src="img/demo/s2.jpg" alt="demo user">
-															</div>
-															<!-- Slide 3 -->
-															<div class="item">
-																<img src="img/demo/m3.jpg" alt="demo user">
-															</div>
-														</div>
-													</div>
-												</div>
-				
-												<div class="col-sm-12">
-				
-													<div class="row">
-				
-														<div class="col-sm-3 profile-pic">
-															<img src="img/avatars/sunny-big.png" alt="demo user">
-															<div class="padding-10">
-																<h4 class="font-md"><strong>1,543</strong>
-																<br>
-																<small>Seguidores</small></h4>
-																<br>
-																
-
-															</div>
-														</div>
-														<div class="col-sm-6">
-															<h1>Liliana <span class="semi-bold">Pérez</span>
-															<br>
-															<small> Instructor, Learning Developer</small></h1>
-				
-															<ul class="list-unstyled">
-																<li>
-																	<p class="text-muted">
-																		<i class="fa fa-phone"></i>&nbsp;&nbsp;(<span class="txt-color-darken">313</span>) <span class="txt-color-darken">464</span> - <span class="txt-color-darken">6473</span>
-																	</p>
-																</li>
-																<li>
-																	<p class="text-muted">
-																		<i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin">liliana@ledev.com</a>
-																	</p>
-																</li>
-																<li>
-																	<p class="text-muted">
-																		<i class="fa fa-skype"></i>&nbsp;&nbsp;<span class="txt-color-darken">LilianaPérez</span>
-																	</p>
-																</li>
-																<li>
-																	<p class="text-muted">
-																		<i class="fa fa-calendar"></i>&nbsp;&nbsp;<span class="txt-color-darken">Disponible <a href="javascript:void(0);" rel="tooltip" title="" data-placement="top" data-original-title="Create an Appointment">4:30 PM</a></span>
-																	</p>
-																</li>
-															</ul>
-															<br>
-															<p class="font-md">
-																<i>Instructor</i>
-															</p>
-															<p>
-				
-																Ingresa texto aqui
-				
-															</p>
-															<br>
-															<a href="javascript:void(0);" class="btn btn-default btn-xs"><i class="fa fa-envelope-o"></i> Enviar Mensaje</a>
-															<br>
-															<br>
-				
-														</div>
-													
-				
-													</div>
-				
-												</div>
-				
-											</div>
-				
-											<div class="row">
-				
-												<div class="col-sm-12">
-				
-													<hr>
-				
-													
-				
-												</div>
-				
-											</div>
-											<!-- end row -->
-				
-										</div>
-				
-									</div>
-									
-								</div>
-				
-							</div>
-				
-				
-					</div>
-				
+			
 				<!-- end widget grid -->
 
 			</div>

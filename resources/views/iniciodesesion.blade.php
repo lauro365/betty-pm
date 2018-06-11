@@ -97,7 +97,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
 						<div class="well no-padding">
-							<form action="{{ action('LoginController@authenticate') }}" id="login-form" class="smart-form client-form" method="POST">
+							<form action="{{ action('LoginController@authenticar') }}" id="login-form" class="smart-form client-form" method="POST">
 							{{ csrf_field() }}
 								<header>
 									Inicia Sesión
@@ -118,7 +118,7 @@
 											<input type="password" name="password">
 											<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Por favor ingresa tu contraseña</b> </label>
 										<div class="note">
-											<a href="forgotpassword.html">Olvidaste tu contraseña?</a>
+											<a href="#">Olvidaste tu contraseña?</a>
 										</div>
 									</section>
 

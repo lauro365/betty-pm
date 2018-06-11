@@ -9,10 +9,11 @@ use Illuminate\Auth\Authenticatable;
 
 class UserAdmin extends Model implements AuthenticatableContract
 {
+    
     use Authenticatable;
     protected $guard = 'UserAdmin';
 
-    public function curso(){
+    public function cursos(){
         return $this->hasMany('App\Curso');
     }
 

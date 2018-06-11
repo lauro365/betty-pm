@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use App\Empleado;
 use App\UserAdmin;
 use App\InstructUser;
 use App\Curso;
+use App\Sala;
 
 class inicioadminController extends Controller
 {
@@ -17,10 +19,10 @@ class inicioadminController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    /*public function __construct()
     {
         $this->middleware('auth');
-    }
+    }*/
 
     /**
      * Show the application dashboard.
@@ -29,8 +31,14 @@ class inicioadminController extends Controller
      */
     public function index()
     {
+        
         $cursos = Curso::all();
-        return view('Inside.Administrador.inicio')->with('cursos', $cursos);
+        $instructores = InstructUser::all();
+        $salas = Sala::all();
+
+        return view('Inside.Administrador.inicio')->with('cursos', $cursos)
+        ->with('instructores', $instructores)
+        ->with('salas', $salas);
         //return view('Inside.Administrador.inicio');
     }
 
@@ -51,16 +59,29 @@ class inicioadminController extends Controller
      */
 
     public function store(Request $request){
+
+        $año = $request->input('año');
+        $mes = $request->input('mes');
+        $dia = $request->input('dia');
+
+        $fecha = $año.$mes.$dia;
+
         $cursito = new Curso;
-        $cursito->fecha_inicio = $request->input('date');
+        $cursito->fecha_inicio = $fecha;
+        $cursito->año = $año;
+        $cursito->mes = $mes;
+        $cursito->dia = $dia;
         $cursito->nombre_curso = $request->input('name');
         $cursito->calificacion_aprobatoria = $request->input('amount');
         $cursito->cupo_maximo = $request->input('tax');
-        $cursito->cantidad_sesiones = $request->input('total');
-        $cursito->estado = $request->input('note');
+        $cursito->cantidad_sesiones = '40';
+        $cursito->sala_id = $request->input('sala');
+        $cursito->instruct_id = $request->input('instructor'); 
         $cursito->save();
+        
 
-        return view('Inside.Administrador.analitica');
+
+        return redirect()->intended('/inicioadmin');
     }
 
     /**
@@ -97,14 +118,14 @@ class inicioadminController extends Controller
 
       public function logout()
     {
-        Auth::logout();
-        
-        if(Auth::check()){
-            return ('Validado aun');
+        Session::flush();
+        if(Session::has('usuarioID'))
+        {
+            return ('Sigue validado');
         }
         else{
-            return view('/');
-        }
+            return redirect()->intended('/');
+        }   
         
         
     }

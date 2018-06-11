@@ -223,7 +223,7 @@
 
 				<!-- logout button -->
 				<div id="logout" class="btn-header transparent pull-right">
-					<span> <a href="{{ url('/') }}" title="Cerrar Sesión" data-action="{{ route('logout') }}" data-logout-msg="Seguro que quieres salir?"><i class="fa fa-sign-out"></i></a> </span>				<!-- end logout button -->
+					<span> <a href="/inicioemp/logout" title="Cerrar Sesión" data-action="" data-logout-msg="Seguro que quieres salir?"><i class="fa fa-sign-out"></i></a> </span>				<!-- end logout button -->
 
 
 			
@@ -250,7 +250,11 @@
 					<a href="javascript:void(0);" id="show-shortcut" data-action="">
 						<img src="img/avatars/sunny.png" alt="me" class="online" /> 
 						<span>
-							{{ Auth::user()->user }}
+								@if(Session::has('usuarioNombre'))
+								@if(Session::has('usuarioApellido'))
+									{{ Session::get('usuarioNombre') }}.{{ Session::get('usuarioApellido') }}
+								@endif
+								@endif
 						</span>
 						<i class="fa fa-angle-down"></i>
 					</a> 
@@ -272,10 +276,14 @@
 						<a href="#" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Menú</span></a>
 						<ul>
 							<li class="">
-								<a href="index.html" title="Dashboard"><span class="menu-item-parent">Inicio</span></a>
+								<a href="{{ url('/inicioemp') }}" title="Dashboard"><span class="menu-item-parent">Inicio</span></a>
 							</li>
 							<li class="active">
-								<a href="mis-cursos.html" title="Dashboard"><span class="menu-item-parent">Mis Cursos</span></a>
+								<a href="{{ url('/miscursos') }}" title="Dashboard"><span class="menu-item-parent">Mis Cursos</span></a>
+							</li>
+							<li class="">
+								<a href="{{ url('/agregarcurso') }}" title="Dashboard"><span class="menu-item-parent">Agregar Cursos</span></a>
+							</li>
 						</ul>	
 					</li>
 					
@@ -369,172 +377,41 @@
 					                <thead>
 											<tr>
 								                    <th data-class="expand">ID</th>
-								                    <th>Sala</th>
+													<th>Curso</th>
+													<th>Sala</th>
 								                    <th>Instructor</th>
-								                    <th data-hide="phone, tablet">Fecha</th>
-								                    <th data-hide="phone,tablet">Duración</th>
+													<th data-hide="phone, tablet">Fecha</th>
+													<th data-hide="phone, tablet">Accion</th>
 								                </tr>
 									</thead>
 									        <tbody>
-											<tr>
-												<td>100</td>
-												<td>A</td>
-												<td>Liliana Pérez</td>
-												<td>2015/04/19, 2:30 - 4:00 PM</td>
-												<td>90 min.</td>
-
+												@foreach($inscripciones as $i)
+													@if($usuarioID == $i->empleado_id)
+															@foreach($cursos as $c)
+															<tr>
+																@if($i->curso_id == $c->id)
+																<td>{{$c->id}}</td>
+																<?php $idcurso = $c->id ?>
+																<td>{{$c->nombre_curso}}</td>
+																	@foreach($salas as $s)
+																			@if($c->sala_id == $s->id)
+																				<td>{{$s->num_sala}}</td>
+																			@endif
+																	@endforeach
+																		@foreach($instructores as $inst)
+																			@if($c->instruct_id == $inst->id)
+																				<td>{{$inst->name}} {{$inst->lastname}}</td>
+																			@endif	
+																		@endforeach
+																	<td>{{$c->fecha_inicio}}</td>
+																	<td><span><a href="/miscursos/{{$c->id}}" class="center-block padding-5 label label-danger">Dar de baja</a></span></td>
+																@endif														
+															</tr>
+															@endforeach
+													@endif
+												@endforeach
 												
-												
-											</tr>
-											<tr>
-												<td>101</td>
-												<td>B</td>
-												<td>Liliana Pérez</td>
-												<td>2015/03/06, 3:00 - 3:15 PM</td>
-												
-												<td>15 min.</td>
-												
-											</tr>
-											<tr>
-												<td>102</td>
-												<td>C</td>
-												<td>Juan Sanchez</td>
-												<td>2015/07/29, 5:00 - 5:30 PM</td>
-												
-												<td>30 min.</td>
-												
-											</tr>
-											<tr>
-												<td>101</td>
-												<td>B</td>
-												<td>Juan Sanchez</td>
-												<td>2015/03/06, 5:00 - 5:15 PM</td>
-												
-												<td>15 min.</td>
-												
-											</tr>
-											<tr>
-												<td>100</td>
-												<td>E</td>
-												<td>Raúl Ochoa</td>
-												<td>2015/04/19, 5:00 - 6:30 PM</td>
-												
-												<td>90 min.</td>
-												
-											</tr>
-											<tr>
-													<td>100</td>
-												<td>F</td>
-												<td>Raúl Ochoa</td>
-												<td>2015/04/19, 4:00 - 5:30 PM</td>
-												
-												<td>90 min.</td>
-												
-											</tr>
-											<tr>
-												<td>100</td>
-												<td>G</td>
-												<td>Martín Alvares</td>
-												<td>2015/04/19, 4:00 - 5:30 PM</td>
-												
-												<td>90 min.</td>
-												
-											</tr>
-											<tr>
-													<td>100</td>
-												<td>H</td>
-												<td>Martín Alvares</td>
-												<td>2015/04/19, 4:00 - 5:30 PM</td>
-												
-												<td>90 min.</td>
-												
-											</tr>
-											<tr>
-												<td>200</td>
-												<td>I</td>
-												<td>Liliana Pérez</td>
-												<td>2015/02/10, 2:00 - 2:25 PM</td>
-												
-												<td>25 min.</td>
-												
-											</tr>
-											<tr>
-												<td>200</td>
-												<td>J</td>
-												<td>Liliana Pérez</td>
-												<td>2015/02/10, 2:00 - 2:25 PM</td>
-												
-												<td>25 min.</td>
-												
-											</tr>
-											<tr>
-												<td>100</td>
-												<td>K</td>
-												<td>Juan Sanchez</td>
-												<td>2015/04/19, 5:00 - 6:30 PM</td>
-												
-												<td>90 min.</td>
-												
-											</tr>
-											<tr>
-												<td>100</td>
-												<td>L</td>
-												<td>Juan Sanchez</td>
-												<td>2015/04/19, 5:00 - 6:30 PM</td>
-												
-												<td>90 min.</td>
-												
-											</tr>
-											</tr>
-												<tr>
-												<td>112</td>
-												<td>O</td>
-												<td>Martín Alvares</td>
-												<td>2015/04/19, 4:00 - 5:00 PM</td>
-												
-												<td>60 min.</td>
-												
-											</tr>
-											<tr>
-												<td>200</td>
-												<td>N</td>
-												<td>Martín Alvares</td>
-												<td>2015/02/10, 4:00 - 4:25 PM</td>
-												
-												<td>25 min.</td>
-												
-											</tr>
-												<tr>
-												<td>112</td>
-												<td>O</td>
-												<td>Raúl Ochoa</td>
-												<td>2015/04/19, 3:00 - 4:00 PM</td>
-												
-												<td>60 min.</td>
-												
-											</tr>
-											<tr>
-												<td>112</td>
-												<td>P</td>
-												<td>Raúl Ochoa</td>
-												<td>2015/04/19, 3:00 - 4:10 PM</td>
-												
-												<td>70 min.</td>
-												
-											</tr>
-										<tr>
-												<td>103</td>
-												<td>Q</td>
-												<td>Raúl Ochoa</td>
-												<td>2015/04/01, 7:00 - 7:35 PM</td>
-												
-												<td>35 min.</td>
-												
-											</tr>
-											
-											</tbody>
-
-																
+											</tbody>						
 										</table>
 
 									</div>

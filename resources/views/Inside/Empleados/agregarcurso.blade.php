@@ -219,7 +219,7 @@
 
 				<!-- logout button -->
 				<div id="logout" class="btn-header transparent pull-right">
-					<span> <a href="{{ url('/') }}" title="Cerrar Sesión" data-action="{{ route('logout') }}" data-logout-msg="Seguro que quieres salir?"><i class="fa fa-sign-out"></i></a> </span>				<!-- end logout button -->
+					<span> <a href="/inicioemp/logout" title="Cerrar Sesión" data-action="" data-logout-msg="Seguro que quieres salir?"><i class="fa fa-sign-out"></i></a> </span>				<!-- end logout button -->
 
 
 			
@@ -246,7 +246,11 @@
 					<a href="javascript:void(0);" id="show-shortcut" data-action="">
 						<img src="img/avatars/sunny.png" alt="me" class="online" /> 
 						<span>
-							{{ Auth::user()->user }}
+								@if(Session::has('usuarioNombre'))
+								@if(Session::has('usuarioApellido'))
+									{{ Session::get('usuarioNombre') }}.{{ Session::get('usuarioApellido') }}
+								@endif
+								@endif
 						</span>
 						<i class="fa fa-angle-down"></i>
 					</a> 
@@ -270,8 +274,12 @@
 							<li class="">
 								<a href="{{ url('/inicioemp') }}" title="Dashboard"><span class="menu-item-parent">Inicio</span></a>
 							</li>
+							<li class="">
+								<a href="{{ url('/miscursos') }}" title="Dashboard"><span class="menu-item-parent">Mis Cursos</span></a>
+							</li>
 							<li class="active">
-								<a href="{{ url('/agregarcurso') }}" title="Dashboard"><span class="menu-item-parent">Mis Cursos</span></a>
+								<a href="{{ url('/agregarcurso') }}" title="Dashboard"><span class="menu-item-parent">Agregar Cursos</span></a>
+							</li>
 						</ul>	
 					</li>
 					
@@ -365,7 +373,9 @@
 					                <thead>
 											<tr>
 								                    <th data-class="expand">ID</th>
-								                    <!--<th>Sala</th> -->
+													<th>Nombre del curso</th>
+													<th>Instructor</th>
+													<th>Sala</th>
 								                    <th>Calificacion aprobatoria</th>
 								                    <th data-hide="phone, tablet">Fecha</th>
 								                    <th data-hide="phone,tablet">Duración</th>
@@ -376,36 +386,42 @@
 									        <tbody>
 												@if(count($cursos)>0)
 												@foreach($cursos as $curso)
+												<?php $countermon = 0; ?>
+												@foreach($inscripciones as $i)
+													@if($usuarioID == $i->empleado_id)
+														@if($i->curso_id == $curso->id)
+															<?php $countermon = 1; ?> 
+														@endif
+													@endif
+												@endforeach
+													@if($countermon == 0)
 													<tr>
 														<td>{{$curso->id}}</td>
-														<!-- <td>A</td> -->
+														<input name="invisible" type="hidden" value="{{$curso->id}}">
+														<td>{{$curso->nombre_curso}}</td>
+														@foreach($instructores as $instructor)
+															@if($curso->instruct_id == $instructor->id)
+																<td>{{$instructor->name}} {{$instructor->lastname}}</td>
+															@endif
+														@endforeach
+														@foreach($salas as $sala)
+															@if($curso->sala_id == $sala->id)
+																<td>{{$sala->num_sala}}</td>
+															@endif
+														@endforeach
 														<td>{{$curso->calificacion_aprobatoria}}</td>
 														<td>{{$curso->fecha_inicio}}</td>
 														<td> {{$curso->cantidad_sesiones}} min.</td>
 														<td>{{$curso->cupo_maximo}} personas</td>
-														<td><span><a class="center-block padding-5 label label-default btn btn-primary bg-color-green">Disponible</a></span></td>
+														<td><span><a href="/agregarcurso/{{$curso->id}}" class="center-block padding-5 label label-success">Disponible</a></span></td>
 													</tr>
+													@endif
 
 												@endforeach
 												@else
 
 												@endif
-											
-											<!--<tr>
-												<td>101</td>
-												<td>B</td>
-												<td>Liliana Pérez</td>
-												<td>2015/03/06, 3:00 - 3:15 PM</td>
-												
-												<td>15 min.</td>
-												<td>50 personas</td>
-												<td><span><a class="center-block padding-5 label label-default btn btn-primary bg-color-green">Disponible</a></span></td>
-											</tr>-->
-											
-											
-											</tbody>
-
-																
+											</tbody>						
 										</table>
 
 									</div>

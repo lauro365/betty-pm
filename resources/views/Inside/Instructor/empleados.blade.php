@@ -217,7 +217,7 @@
 
 				<!-- logout button -->
 				<div id="logout" class="btn-header transparent pull-right">
-					<span> <a href="{{ url('/') }}" title="Cerrar Sesión" data-action="{{ route('logout') }}" data-logout-msg="Seguro que quieres salir?"><i class="fa fa-sign-out"></i></a> </span>				<!-- end logout button -->
+					<span> <a href="/inicioi/logout" title="Cerrar Sesión" data-action="" data-logout-msg="Seguro que quieres salir?"><i class="fa fa-sign-out"></i></a> </span>				<!-- end logout button -->
 
 
 			
@@ -244,7 +244,11 @@
 					<a href="javascript:void(0);" id="show-shortcut" data-action="">
 						<img src="img/avatars/sunny.png" alt="me" class="online" /> 
 						<span>
-							{{ Auth::user()->user }}
+								@if(Session::has('usuarioNombre'))
+								@if(Session::has('usuarioApellido'))
+									{{ Session::get('usuarioNombre') }}.{{ Session::get('usuarioApellido') }}
+								@endif
+								@endif
 						</span>
 						<i class="fa fa-angle-down"></i>
 					</a> 
@@ -375,135 +379,49 @@
 											
 									            <tr>
 								                    <th data-class="expand">Nombre</th>
-								                    <th >Matricula</th>
+								                    <th >Nombre del Curso</th>
 								                    
 								                    
-								                    <th data-hide="phone,tablet">Hora de Llegada</th>
+								                    <th data-hide="phone,tablet">Fecha del Curso</th>
 								                    <th>Calificación</th>
 									            </tr>
 									        </thead>
 
 											<tbody>
-											<tr>
-												<td>Israel Llanes</td>
-												<td>1500000</td>
+													<?php $todayDate = date("Y-m-d"); ?>
+												@foreach($cursos as $c)
+													@if($usuarioID == $c->instruct_id)
+
+														@foreach($inscritos as $in)
+															@if($in->curso_id == $c->id)
+
+																@foreach($empleados as $e)
+																	@if($in->empleado_id == $e->id)
+																	<tr>
+																	<td>{!! $e->name !!} {!! $e->lastname !!}</td>
+																	<td>{!!$c->nombre_curso !!}</td>
+																	<td>{!! $c->fecha_inicio !!}</td>
+																	<?php if(strtotime($c->fecha_inicio) >= strtotime($todayDate)){ ?>
+																		<td><span class="center-block padding-5 label label-default">Pendiente</span></td>
+																	<?php } else { ?>
+																		<td><span class="center-block padding-5 label label-success">Aprobado</span></td>
+																		<?php } ?>
+																	</tr> 
+																	@endif
+																@endforeach
+
+															@endif
+														@endforeach
+
+													@endif
+												@endforeach
+												<tr>
+													<td>Israel Llanes</td>
+													<td>Programacion Multimedia</td>
 											
-												<td>1:00 pm</td>
-												<td><span class="center-block padding-5 label label-success">Aprobado</span></td>
-											</tr>
-										<tr>
-												<td>Israel Llanes</td>
-												<td>1500000</td>
-											
-												<td>1:00 pm</td>
-												<td><span class="center-block padding-5 label label-success">Aprobado</span></td>
-											</tr>
-										<tr>
-												<td>Israel Llanes</td>
-												<td>1500000</td>
-											
-												<td>1:00 pm</td>
-												<td><span class="center-block padding-5 label label-success">Aprobado</span></td>
-											</tr>
-											<tr>
-												<td>Israel Llanes</td>
-												<td>1500000</td>
-											
-												<td>1:00 pm</td>
-												<td><span class="center-block padding-5 label label-success">Aprobado</span></td>
-											</tr>
-										<tr>
-												<td>Israel Llanes</td>
-												<td>1500000</td>
-											
-												<td>1:00 pm</td>
-												<td><span class="center-block padding-5 label label-success">Aprobado</span></td>
-											</tr>
-										<tr>
-												<td>Israel Llanes</td>
-												<td>1500000</td>
-											
-												<td>1:00 pm</td>
-												<td><span class="center-block padding-5 label label-success">Aprobado</span></td>
-											</tr>
-										<tr>
-												<td>Israel Llanes</td>
-												<td>1500000</td>
-											
-												<td>1:00 pm</td>
-												<td><span class="center-block padding-5 label label-success">Aprobado</span></td>
-											</tr>
-										<tr>
-												<td>Israel Llanes</td>
-												<td>1500000</td>
-											
-												<td>1:00 pm</td>
-												<td><span class="center-block padding-5 label label-success">Aprobado</span></td>
-											</tr>
-									<tr>
-												<td>Israel Llanes</td>
-												<td>1500000</td>
-											
-												<td>1:00 pm</td>
-												<td><span class="center-block padding-5 label label-success">Aprobado</span></td>
-											</tr>
-									<tr>
-												<td>Israel Llanes</td>
-												<td>1500000</td>
-											
-												<td>1:00 pm</td>
-												<td><span class="center-block padding-5 label label-success">Aprobado</span></td>
-											</tr>
-										<tr>
-												<td>Israel Llanes</td>
-												<td>1500000</td>
-											
-												<td>1:00 pm</td>
-												<td><span class="center-block padding-5 label label-success">Aprobado</span></td>
-											</tr>
-										<tr>
-												<td>Israel Llanes</td>
-												<td>1500000</td>
-											
-												<td>1:00 pm</td>
-												<td><span class="center-block padding-5 label label-success">Aprobado</span></td>
-											</tr>
-										<tr>
-												<td>Israel Llanes</td>
-												<td>1500000</td>
-											
-												<td>1:00 pm</td>
-												<td><span class="center-block padding-5 label label-danger">Reprobado</span></td>
-											</tr>
-											<tr>
-												<td>Israel Llanes</td>
-												<td>1500000</td>
-											
-												<td>1:00 pm</td>
-												<td><span class="center-block padding-5 label label-danger">Reprobado</span></td>
-											</tr>
-											<tr>
-												<td>Israel Llanes</td>
-												<td>1500000</td>
-											
-												<td>1:00 pm</td>
-												<td><span class="center-block padding-5 label label-danger">Reprobado</span></td>
-											</tr>
-										<tr>
-												<td>Israel Llanes</td>
-												<td>1500000</td>
-											
-												<td>1:00 pm</td>
-												<td><span class="center-block padding-5 label label-danger">Reprobado</span></td>
-											</tr>
-										<tr>
-												<td>Israel Llanes</td>
-												<td>1500000</td>
-											
-												<td>1:00 pm</td>
-												<td><span class="center-block padding-5 label label-danger">Reprobado</span></td>
-											</tr>
-											
+													<td>2018-05-22</td>
+													<td><span class="center-block padding-5 label label-danger">Reprobado</span></td>
+												</tr>
 											</tbody>
 																
 										</table>
